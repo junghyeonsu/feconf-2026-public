@@ -1,4 +1,4 @@
-# FECONF 2026 · AI로 디자인하기
+# FECONF 2026 디자인 시스템, 더 나아가서 (정현수)
 
 **당근의 톤에 맞게** — 정현수 · 당근 Design Engineer
 
@@ -38,14 +38,6 @@ bun scripts/export-html.mjs
 장표 원본은 `slides/design-system-beyond/index.tsx`입니다. 오프라인용 단일 HTML은 `output/html/feconf-2026-standalone.html`에 생성됩니다. [내보내기 안내](docs/html-export.md)를 참고하세요.
 
 대본의 참고 링크는 `docs/presentation-script.md`에서 관리합니다. 내보낼 때 페이지 순서와 대사를 장표 원본과 대조하므로, 장표의 노트를 바꾼 경우 대본 문서도 함께 갱신해야 합니다.
-
-## 공개용 소스 준비
-
-```sh
-bun scripts/prepare-public-source.mjs
-```
-
-`output/public-source/`에 발표·대본·실행에 필요한 파일만 복사합니다. 기존 `.git`, 연구 자료, 검토 기록, 로컬 출력물, 에이전트 설정은 포함하지 않습니다. 이 명령은 Git 초기화, 원격 저장소 생성, 공개 전환, 업로드를 수행하지 않습니다.
 
 ## 자료 출처
 
