@@ -121,7 +121,7 @@ globalThis.__deckAsset = file => {
   const description = '당근의 톤에 맞게 AI로 디자인하기. 정현수의 FECONF 2026 발표 장표, 대본과 참고 링크.';
   let socialMeta = '';
   if (publicMode) {
-    await fs.copyFile(path.join(root, 'public/og-image.png'), path.join(path.dirname(target), 'og-image.png'));
+    await fs.copyFile(path.join(root, 'public/og-image.jpg'), path.join(path.dirname(target), 'og-image.jpg'));
     socialMeta = `<link rel="canonical" href="${siteUrl}">
 <meta name="description" content="${description}">
 <meta property="og:type" content="website">
@@ -129,15 +129,15 @@ globalThis.__deckAsset = file => {
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${description}">
 <meta property="og:url" content="${siteUrl}">
-<meta property="og:image" content="${siteUrl}og-image.png">
-<meta property="og:image:type" content="image/png">
+<meta property="og:image" content="${siteUrl}og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="2926">
 <meta property="og:image:height" content="1632">
 <meta property="og:image:alt" content="디자인 시스템, 더 나아가서 — 정현수, 당근 Design Engineer">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${title}">
 <meta name="twitter:description" content="${description}">
-<meta name="twitter:image" content="${siteUrl}og-image.png">
+<meta name="twitter:image" content="${siteUrl}og-image.jpg">
 <meta name="twitter:image:alt" content="디자인 시스템, 더 나아가서 — 정현수, 당근 Design Engineer">`;
   }
   const safeJson = value => JSON.stringify(value).replaceAll('<', '\\u003c');
