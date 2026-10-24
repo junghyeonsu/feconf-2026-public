@@ -8,7 +8,7 @@ const target = path.join(root, 'output/public-source');
 const entries = [
   'README.md', '.gitignore', 'package.json', 'bun.lock', 'tsconfig.json',
   'open-slide.config.ts', 'docs/presentation-script.md', 'docs/html-export.md',
-  'scripts', 'slides/design-system-beyond',
+  'scripts', 'slides/design-system-beyond', 'public',
 ];
 await fs.mkdir(path.dirname(target), { recursive: true });
 try {

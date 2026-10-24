@@ -116,8 +116,32 @@ globalThis.__deckAsset = file => {
 };`;
   const preflight = await fs.readFile(fileURLToPath(import.meta.resolve('tailwindcss/preflight.css')), 'utf8');
   const css = `${preflight}html{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-feature-settings:'ss01' on,'cv11' on,'calt' on}body{font-feature-settings:'ss01' on,'cv11' on,'calt' on,'tnum' off;letter-spacing:-.005em}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#171717}.stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}.frame{width:1920px;height:1080px;flex-shrink:0;position:relative;transform-origin:center center}.page{position:absolute;inset:0}.page[hidden]{display:none!important}`;
+  const siteUrl = 'https://junghyeonsu.github.io/feconf-2026-public/';
+  const title = 'FECONF 2026 디자인 시스템, 더 나아가서 (정현수)';
+  const description = '당근의 톤에 맞게 AI로 디자인하기. 정현수의 FECONF 2026 발표 장표, 대본과 참고 링크.';
+  let socialMeta = '';
+  if (publicMode) {
+    await fs.copyFile(path.join(root, 'public/og-image.png'), path.join(path.dirname(target), 'og-image.png'));
+    socialMeta = `<link rel="canonical" href="${siteUrl}">
+<meta name="description" content="${description}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${description}">
+<meta property="og:url" content="${siteUrl}">
+<meta property="og:image" content="${siteUrl}og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="2926">
+<meta property="og:image:height" content="1632">
+<meta property="og:image:alt" content="디자인 시스템, 더 나아가서 — 정현수, 당근 Design Engineer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${title}">
+<meta name="twitter:description" content="${description}">
+<meta name="twitter:image" content="${siteUrl}og-image.png">
+<meta name="twitter:image:alt" content="디자인 시스템, 더 나아가서 — 정현수, 당근 Design Engineer">`;
+  }
   const safeJson = value => JSON.stringify(value).replaceAll('<', '\\u003c');
-  const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FECONF 2026 디자인 시스템, 더 나아가서 (정현수)</title><link rel="icon" href="data:,"><style>${css}</style></head><body><div class="stage"><main class="frame">${pages.map((_, i) => `<section class="page" aria-label="장표 ${i + 1}"${i ? ' hidden' : ''}></section>`).join('')}</main></div><script id="speaker-notes" type="application/json">${safeJson(deck.notes)}</script><script id="reading-data" type="application/json">${safeJson(reading)}</script><script id="embedded-assets" type="application/json">${safeJson(embedded)}</script><script>${bootstrap}\n${script.replace(/<\/script/gi, '<\\/script')}</script></body></html>`;
+  const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FECONF 2026 디자인 시스템, 더 나아가서 (정현수)</title>${socialMeta}<link rel="icon" href="data:,"><style>${css}</style></head><body><div class="stage"><main class="frame">${pages.map((_, i) => `<section class="page" aria-label="장표 ${i + 1}"${i ? ' hidden' : ''}></section>`).join('')}</main></div><script id="speaker-notes" type="application/json">${safeJson(deck.notes)}</script><script id="reading-data" type="application/json">${safeJson(reading)}</script><script id="embedded-assets" type="application/json">${safeJson(embedded)}</script><script>${bootstrap}\n${script.replace(/<\/script/gi, '<\\/script')}</script></body></html>`;
   await fs.writeFile(target, html);
   const verification = {
     pages: pages.length, notes: deck.notes.length, presenterMode: true,
